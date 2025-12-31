@@ -17,7 +17,10 @@ async function getAuthHeader(): Promise<Record<string, string>> {
     console.log('Auth token present, length:', token.length);
   }
 
-  return token ? { 'Authorization': `Bearer ${token}` } : {};
+  return {
+    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+    'ngrok-skip-browser-warning': 'true'
+  };
 }
 
 async function fetchWithTimeout(
@@ -43,16 +46,9 @@ async function fetchWithTimeout(
     clearTimeout(timeoutId);
 
     if (!response.ok) {
-      console.error(`[API Error] ${url} - ${response.status} ${response.statusText}`);
-
-      if (response.status === 401 || response.status === 403) {
-        console.warn('Authentication failed - you may need to log in');
-      }
-
-      try {
-        const errorText = await response.clone().text();
-        console.error(`[API Error Details]`, errorText);
-      } catch {}
+      const text = await response.text();
+      console.error(`[API Error Response Body]:`, text.substring(0, 500));
+      return response;
     }
 
     return response;
