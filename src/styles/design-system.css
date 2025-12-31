@@ -1,0 +1,166 @@
+/* ========================================
+   SHARED DESIGN TOKENS
+   ======================================== */
+
+/* Base Colors - from CONTEXT.md */
+:root {
+  --primary: #135bec;
+  --primary-hover: #0e4bce;
+  --background-light: #f6f6f8;
+  --background-dark: #101622;
+  --border-light: #e5e7eb;
+  --border-dark: #1f2937;
+  --text-main: #111827;
+  --text-sub: #6b7280;
+
+  /* Accent Colors */
+  --accent-indigo: #6366f1;
+  --accent-blue: #3b82f6;
+  --accent-purple: #9333ea;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-red: #ef4444;
+}
+
+/* Typography - from CONTEXT.md */
+:root {
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Shadows - from CONTEXT.md */
+:root {
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 5px -1px rgba(0, 0, 0, 0.06);
+  --shadow-calendar-card: 0 2px 5px -1px rgba(0, 0, 0, 0.04);
+}
+
+/* Spacing - consistent across all pages */
+:root {
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 2.5rem;    /* 40px */
+}
+
+/* Border Radius - consistent */
+:root {
+  --radius-sm: 0.375rem;    /* 6px */
+  --radius-md: 0.5rem;       /* 8px */
+  --radius-lg: 0.75rem;      /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+}
+
+/* ========================================
+   SHARED COMPONENT STYLES
+   ======================================== */
+
+/* Card Styles - consistent across all pages */
+.shared-card {
+  background: var(--background-light);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+  transition: all 0.2s ease;
+}
+
+.shared-card:hover {
+  border-color: var(--accent-indigo);
+  box-shadow: var(--shadow-md);
+}
+
+/* Input Styles - consistent across all pages */
+.shared-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-sm);
+  font-family: var(--font-family);
+  font-size: 0.875rem;  /* 14px */
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: white;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
+}
+
+.shared-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(19, 130, 250, 0.1);
+}
+
+/* Button Styles - consistent across all pages */
+.shared-button-primary {
+  background: var(--primary);
+  color: white;
+  font-family: var(--font-family);
+  font-weight: 600;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.shared-button-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.shared-button-secondary {
+  background: white;
+  color: var(--text-main);
+  font-family: var(--font-family);
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shared-button-secondary:hover {
+  background: var(--background-light);
+  border-color: var(--accent-indigo);
+}
+
+/* Layout Container - centered, not grid-based */
+.shared-page-container {
+  max-width: 48rem;  /* 768px */
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  background: var(--background-light);
+  min-height: 100vh;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-light: #101622;
+    --background-dark: #0b0e14;
+    --border-light: #1f2937;
+    --border-dark: #374151;
+    --text-main: #ffffff;
+    --text-sub: #9ca3af;
+  }
+
+  .shared-card {
+    background: var(--background-dark);
+    border-color: var(--border-dark);
+  }
+
+  .shared-input {
+    background: var(--background-dark);
+    border-color: var(--border-dark);
+  }
+
+  .shared-button-primary:hover {
+    background: var(--primary-hover);
+  }
+
+  .shared-button-secondary:hover {
+    background: var(--background-dark);
+  }
+}
